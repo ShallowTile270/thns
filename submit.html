@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Submit your app · Handshake App Hub</title><meta name="description" content="Discover apps and dApps built on Handshake — social, voting, DeFi, marketplaces and more.">
+<link rel="stylesheet" href="/assets/style.css"></head><body>
+<header class="nav"><div class="wrap nav-in">
+<a class="brand" href="/index.html"><span class="logo">🤝</span> Handshake App Hub</a>
+<nav><a href="/browse.html">Browse</a><a href="/index.html#start">Get started</a><a class="btn small" href="/submit.html">Submit your app</a></nav>
+</div></header>
+<main class="wrap">
+<h1>Submit your app</h1><p class="lead">Built something on Handshake? List it here. Submissions are reviewed before they go live.</p>
+<form id="form" class="form">
+<label>App name *<input name="name" required maxlength="60"></label>
+<label>Tagline *<input name="tagline" required maxlength="100" placeholder="One line on what it does"></label>
+<label>Description *<textarea name="description" required minlength="20" maxlength="1500" rows="6" placeholder="What does it do? Why is it interesting for Handshake newcomers?"></textarea></label>
+<label>App URL *<input name="url" type="url" required maxlength="300" placeholder="https://yourapp/"></label>
+<label>Category<select name="category" id="category"></select></label>
+<label>Screenshot URL (optional)<input name="screenshot" type="url" maxlength="300" placeholder="https://…/preview.png"></label>
+<label>Contact (optional, not public)<input name="contact" maxlength="120" placeholder="email, Discord, or Twitter"></label>
+<label class="check"><input type="checkbox" name="needsResolver"> Requires a Handshake resolver to open</label>
+<input class="hp" name="website" tabindex="-1" autocomplete="off" aria-hidden="true">
+<button class="btn" type="submit">Submit for review</button><p id="msg" class="msg" role="status"></p>
+</form></main>
+<footer class="foot"><div class="wrap">Community directory of apps on <a href="https://handshake.org" rel="noopener noreferrer">Handshake</a>. Listings are submitted by their creators and not audited or endorsed. · <a href="/submit.html">Submit an app</a></div></footer>
+<script type="module" src="/assets/submit.js"></script>
+</body></html>

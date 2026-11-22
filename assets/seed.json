@@ -1,0 +1,5 @@
+[
+  {"id":"sample-voting","sample":true,"name":"Example: Community Vote","tagline":"A sample listing for a decentralized voting app","description":"This is a placeholder showing how a voting & governance dApp would appear here. Real listings from builders replace these samples once approved.","url":"","category":"Voting & Governance","screenshot":"","needsResolver":true,"featured":true,"votes":0,"createdAt":3},
+  {"id":"sample-social","sample":true,"name":"Example: Pirate-style Social","tagline":"A sample listing for a censorship-resistant social app","description":"Placeholder showing a social dApp. Submit your own app to get listed in its place and be seen by people new to Handshake.","url":"","category":"Social","screenshot":"","needsResolver":true,"featured":true,"votes":0,"createdAt":2},
+  {"id":"sample-market","sample":true,"name":"Example: Name Marketplace","tagline":"A sample listing for a marketplace","description":"Placeholder showing a marketplace listing, e.g. trading or showcasing Handshake names and digital goods.","url":"","category":"Marketplace","screenshot":"","needsResolver":false,"featured":false,"votes":0,"createdAt":1}
+]
