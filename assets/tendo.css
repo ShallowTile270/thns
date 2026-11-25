@@ -1,0 +1,12 @@
+html,body{height:100%;margin:0;background:#000}
+body{display:flex;align-items:center;justify-content:center;overflow:hidden}
+.tendo{position:relative;margin:0;font-family:"Avenir Next","Futura","Century Gothic","Helvetica Neue",Arial,sans-serif;font-weight:800;font-size:clamp(5rem,20vw,13rem);letter-spacing:.04em;line-height:1;
+ background:linear-gradient(115deg,#ff6ec7,#7c5cff,#2ee6c5,#fff7a8,#ff9ad5,#6ec8ff,#ff6ec7);background-size:180% 180%;
+ -webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent;
+ opacity:.78;filter:drop-shadow(0 0 24px rgba(160,140,255,.35));animation:sheen 8s ease-in-out infinite alternate}
+.tendo::after{content:attr(data-text);position:absolute;inset:0;
+ background:linear-gradient(105deg,transparent 35%,rgba(255,255,255,.55) 50%,transparent 65%);background-size:250% 100%;background-position:150% 0;
+ -webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent;mix-blend-mode:screen;animation:glint 6s ease-in-out infinite}
+@keyframes sheen{from{background-position:0% 50%}to{background-position:100% 50%}}
+@keyframes glint{0%{background-position:150% 0}60%,100%{background-position:-50% 0}}
+@media (prefers-reduced-motion:reduce){.tendo,.tendo::after{animation:none}}

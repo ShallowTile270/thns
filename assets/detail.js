@@ -42,6 +42,6 @@ if (!app) {
           : "This app works over the regular web — no special setup needed." }),
         el("li", { text: "Click “Open app” — it opens in a new tab." }),
         el("li", { text: "Only connect a wallet or sign anything if you trust the app. Always check the URL." })),
-      el("a", { href: "/index.html#start", text: "New to Handshake? Read the beginner guide →" })),
+      el("a", { href: "/browse.html", text: "New to Handshake? Read the beginner guide →" })),
     el("p", { class: "muted small", text: "Listings are submitted by their creators. This hub doesn't audit or endorse apps — do your own research." }));
 }
