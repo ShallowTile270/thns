@@ -24,5 +24,6 @@ ADMIN_TOKEN=test npx netlify dev
 ## Notes
 - Strict CSP is set in `netlify.toml` (no inline scripts/styles, same-origin fetches). Screenshots may be any https image.
 - All user content is rendered via `textContent`; links are restricted to http(s) with `rel="noopener noreferrer nofollow"`.
-- The homepage (`index.html`) is a black "Tendo" splash; the directory lives at `/browse.html`, `/submit.html`.
+- The homepage (`index.html`) is the Tendo landing page (classic Apple-style, red-pill logo) linking to `/videos.html`, `/blog.html`, `/podcasts.html`, `/news.html`. Add entries to those pages by following the commented example in each. Shared styles: `assets/site.css`; logo: `assets/redpill.svg`.
+- The app directory lives at `/browse.html`, `/submit.html`.
 - To host the same files on a Handshake name, point it at the Netlify site; relative `/…` paths work from the site root.
