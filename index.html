@@ -1,35 +1,28 @@
 <!doctype html>
 <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Tendo — Welcome to Handshake</title><meta name="description" content="Tendo's home on Handshake: videos, a decentralized blog, podcasts and uncensorable news.">
+<title>Tendo — Welcome to Handshake</title><meta name="description" content="Tendo's home on Handshake: videos, podcasts and uncensorable news.">
 <meta name="theme-color" content="#1d1d1f"><link rel="icon" href="/assets/redpill.svg" type="image/svg+xml">
 <link rel="stylesheet" href="/assets/site.css"></head>
 <body>
 <header class="nav"><div class="nav-in">
   <a class="mark" href="/"><img src="/assets/redpill.svg" alt="">Tendo</a>
+  <a class="item" href="/">Home</a>
   <a class="item" href="/videos.html">Videos</a>
-  <a class="item" href="/blog.html">Blog</a>
   <a class="item" href="/podcasts.html">Podcasts</a>
   <a class="item" href="/news.html">News</a>
+  <a class="item" href="/links.html">Links</a>
   <a class="cta" href="https://handshake.org" rel="noopener noreferrer">Wake up</a>
 </div></header>
 <main>
-<section class="stage">
-  <img class="icon rise" src="/assets/redpill.svg" alt="A red pill" width="120" height="120">
-  <h1 class="title rise d1">Tendo</h1>
-  <p class="sub rise d2">Welcome to Handshake.</p>
-  <div class="player rise d3" data-player>
+<section class="stage home">
+  <h1 class="sub rise">Welcome to Handshake.</h1>
+  <div class="player rise d1" data-player>
     <button class="pnav prev" type="button" data-cmd="previousVideo" aria-label="Previous video" hidden><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg><span>Previous</span></button>
-    <div class="screen"><iframe src="https://www.youtube-nocookie.com/embed/YjIBfW7VTtM?playlist=YjIBfW7VTtM,2h4jNRnCYEk,LFTLzPMlO1o,MZu26ovwnjU,LVVX-zLL_R4,j6nhheL_Tqo&amp;enablejsapi=1&amp;rel=0&amp;playsinline=1" title="Tendo&rsquo;s latest videos" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></div>
+    <div class="screen"><iframe src="https://www.youtube-nocookie.com/embed/videoseries?list=PLfO0ZjzU8g3o&amp;enablejsapi=1&amp;rel=0&amp;playsinline=1" title="Tendo&rsquo;s latest videos" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></div>
     <button class="pnav next" type="button" data-cmd="nextVideo" aria-label="Next video" hidden><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg><span>Next</span></button>
     <p class="now" aria-live="polite"><span data-now>Latest uploads from @tendo442</span></p>
   </div>
-  <ul class="links rise d4">
-    <li><a href="/videos.html"><span>My Videos</span></a></li>
-    <li><a href="/blog.html"><span>Blog</span></a></li>
-    <li><a href="/podcasts.html"><span>Podcasts</span></a></li>
-    <li><a href="/news.html"><span>News</span></a></li>
-  </ul>
-  <p class="whisper rise d4">You took the <b>red pill</b>. This site lives outside centralized DNS.</p>
+  <p class="whisper rise d2">You took the <b>red pill</b>. This site lives outside centralized DNS.</p>
 </section>
 
 <div class="wrap">
@@ -37,28 +30,24 @@
   <p class="section-p">Everything here is published on a name nobody can take away.</p>
   <div class="tiles">
     <a class="tile" href="/videos.html">
-      <span class="glyph"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="3"/><path d="M10 9.5v5l4.5-2.5z"/></svg></span>
       <h3>My Videos</h3><p class="tag">Watch</p>
       <p class="desc">Films, clips and experiments, straight from me to you.</p>
       <span class="go">Watch now</span>
     </a>
-    <a class="tile" href="/blog.html">
-      <span class="glyph"><svg viewBox="0 0 24 24"><path d="M4 20h4L19 9l-4-4L4 16z"/><path d="M13.5 6.5l4 4"/></svg></span>
-      <h3>Blog</h3><p class="tag">Decentralized &middot; Uncensorable</p>
-      <p class="desc">A platform for groups and writers whose ideas get shut out elsewhere, published where they can&rsquo;t be quietly deleted.</p>
-      <span class="go">Read the blog</span>
-    </a>
     <a class="tile" href="/podcasts.html">
-      <span class="glyph"><svg viewBox="0 0 24 24"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/></svg></span>
       <h3>Podcasts</h3><p class="tag">Listen</p>
       <p class="desc">Conversations about Handshake, the open web and whatever comes next.</p>
       <span class="go">Start listening</span>
     </a>
     <a class="tile" href="/news.html">
-      <span class="glyph"><svg viewBox="0 0 24 24"><path d="M4 5h13v14H6a2 2 0 0 1-2-2z"/><path d="M17 9h3v8a2 2 0 0 1-2 2M7.5 9h6M7.5 12.5h6M7.5 16h4"/></svg></span>
-      <h3>News</h3><p class="tag">Decentralized &middot; Uncensorable</p>
-      <p class="desc">Headlines and updates, with no middleman deciding what you get to see.</p>
+      <h3>News</h3><p class="tag">Uncensorable</p>
+      <p class="desc">News and ideas that get shut out elsewhere, from groups and writers with nowhere else to speak.</p>
       <span class="go">Get the news</span>
+    </a>
+    <a class="tile" href="/links.html">
+      <h3>Links</h3><p class="tag">Recommended</p>
+      <p class="desc">My favourite tools, explorers and wallets for Handshake and the open web.</p>
+      <span class="go">See my picks</span>
     </a>
   </div>
 
@@ -66,13 +55,13 @@
   <p class="section-p">New videos, posts and episodes, announced first on X and YouTube.</p>
   <div class="social">
     <a class="soc" href="https://x.com/tendo442" rel="noopener noreferrer"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M17.8 3h3.1l-6.8 7.8L22 21h-6.3l-4.9-6.4L5.2 21H2.1l7.3-8.3L2 3h6.4l4.4 5.9zm-1.1 16.2h1.7L7.4 4.7H5.6z"/></svg><span><b>Follow on X</b><small>@tendo442</small></span></a>
-    <a class="soc" href="https://www.youtube.com/@tendo442" rel="noopener noreferrer"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M23 7.2a3 3 0 0 0-2.1-2.1C19 4.6 12 4.6 12 4.6s-7 0-8.9.5A3 3 0 0 0 1 7.2 31 31 0 0 0 .5 12a31 31 0 0 0 .5 4.8 3 3 0 0 0 2.1 2.1c1.9.5 8.9.5 8.9.5s7 0 8.9-.5a3 3 0 0 0 2.1-2.1 31 31 0 0 0 .5-4.8 31 31 0 0 0-.5-4.8zM9.7 15.1V8.9l5.8 3.1z"/></svg><span><b>Subscribe on YouTube</b><small>@tendo442</small></span></a>
+    <a class="soc" href="https://www.youtube.com/@tendo442?sub_confirmation=1" rel="noopener noreferrer"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M23 7.2a3 3 0 0 0-2.1-2.1C19 4.6 12 4.6 12 4.6s-7 0-8.9.5A3 3 0 0 0 1 7.2 31 31 0 0 0 .5 12a31 31 0 0 0 .5 4.8 3 3 0 0 0 2.1 2.1c1.9.5 8.9.5 8.9.5s7 0 8.9-.5a3 3 0 0 0 2.1-2.1 31 31 0 0 0 .5-4.8 31 31 0 0 0-.5-4.8zM9.7 15.1V8.9l5.8 3.1z"/></svg><span><b>Subscribe on YouTube</b><small>@tendo442</small></span></a>
   </div>
 </div>
 </main>
 <footer class="foot">
   <span>&copy; <span id="year">2026</span> Tendo. Served on Handshake &mdash; no central DNS, no gatekeepers.</span>
-  <span class="foot-links"><a href="/">Home</a> &middot; <a href="/contact.html">Contact</a> &middot; <a href="https://x.com/tendo442" rel="noopener noreferrer">X</a> &middot; <a href="https://www.youtube.com/@tendo442" rel="noopener noreferrer">YouTube</a> &middot; <a href="https://handshake.org" rel="noopener noreferrer">What is Handshake?</a></span>
+  <span class="foot-links"><a href="/">Home</a> &middot; <a href="/contact.html">Contact</a> &middot; <a href="/links.html">Links</a> &middot; <a href="https://x.com/tendo442" rel="noopener noreferrer">X</a> &middot; <a href="https://www.youtube.com/@tendo442" rel="noopener noreferrer">YouTube</a> &middot; <a href="https://handshake.org" rel="noopener noreferrer">What is Handshake?</a></span>
 </footer>
 <script src="/assets/site.js" defer></script>
 </body></html>

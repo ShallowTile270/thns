@@ -8,3 +8,13 @@
     X-Frame-Options = "DENY"
     Referrer-Policy = "strict-origin-when-cross-origin"
     Content-Security-Policy = "default-src 'self'; frame-src https://www.youtube-nocookie.com; script-src 'self'; style-src 'self'; img-src 'self' https: data:; base-uri 'self'; form-action 'self'; frame-ancestors 'none'"
+
+[[redirects]]
+  from = "/blog.html"
+  to = "/news.html"
+  status = 301
+
+[[redirects]]
+  from = "/blog"
+  to = "/news"
+  status = 301
