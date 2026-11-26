@@ -4,7 +4,7 @@ const y = document.getElementById("year");
 if (y) y.textContent = new Date().getFullYear();
 
 // Yin-yang nav: split colours only while the pill straddles the stage's top edge (top of the page).
-// Crossing the threshold sends a water ripple through the page itself, outward from the red pill
+// Crossing the threshold sends a water ripple through the page itself, outward from a point just below the bar,
 // like a pebble dropped in a pond, and the bar's new colours arrive with the wavefront.
 const navIn = document.querySelector(".nav-in");
 if (navIn) {
@@ -12,7 +12,6 @@ if (navIn) {
   const SOLID_BG = "#1d1d1f";
   const SVGNS = "http://www.w3.org/2000/svg";
   const still = window.matchMedia("(prefers-reduced-motion: reduce)");
-  const pebble = navIn.querySelector(".mark img") || navIn;
   const page = document.querySelector("main");
   const WAVE_AT = 0.6; // where the ring sits in the displacement map (fraction of its radius)
   let split = window.scrollY < 4;
@@ -26,8 +25,8 @@ if (navIn) {
     const ctx = c.getContext("2d"), img = ctx.createImageData(N, N), h = N / 2;
     for (let yy = 0; yy < N; yy++) for (let xx = 0; xx < N; xx++) {
       const dx = (xx + 0.5 - h) / h, dy = (yy + 0.5 - h) / h, d = Math.hypot(dx, dy);
-      const w = (d - WAVE_AT) / 0.15;
-      const amp = d > 0 && d < 1 ? Math.exp(-w * w) * Math.sin(w * Math.PI * 1.3) : 0;
+      const w = (d - WAVE_AT) / 0.19; // a short train of crests, like a real ripple
+      const amp = d > 0 && d < 1 ? Math.exp(-w * w) * Math.sin(w * Math.PI * 1.7) : 0;
       const i = (yy * N + xx) * 4;
       img.data[i] = 128 + 127 * amp * (d ? dx / d : 0);
       img.data[i + 1] = 128 + 127 * amp * (d ? dy / d : 0);
@@ -93,24 +92,32 @@ if (navIn) {
     fx.append(fill);
     page.style.filter = "url(#pond)";
 
-    const DURATION = 1200, start = performance.now();
-    const pr = pebble.getBoundingClientRect();
-    const vx = pr.left + pr.width / 2, vy = pr.top + pr.height / 2; // pebble, in viewport coordinates
-    const reach = Math.hypot(Math.max(vx, innerWidth - vx), innerHeight - vy) * 0.85;
+    // Focal point: centred just below the bar. It is fixed to the page content, so if you scroll
+    // mid-ripple it travels with the content by exactly the distance scrolled.
+    const DURATION = 2000, start = performance.now();
+    const b0 = navIn.getBoundingClientRect(), m0 = page.getBoundingClientRect();
+    const ox = b0.left + b0.width / 2 - m0.left, oy = b0.bottom + 28 - m0.top; // in page coordinates
+    const reach = Math.min(900, Math.max(420, innerWidth * 0.55));            // spreads outward, then fades
+    const SOFT = 56;                                                         // soft edge of the colour reveal
 
     const frame = (now) => {
       const t = Math.min(1, (now - start) / DURATION);
-      const r = reach * (1 - Math.pow(1 - t, 3));      // wavefront radius, easing out
-      const strength = 28 * Math.min(1, t / 0.15) * Math.pow(1 - t, 1.6); // eases in, then calms as it spreads
-      const m = page.getBoundingClientRect();          // page coordinates (it moves while scrolling)
+      const r = reach * (1 - Math.pow(1 - t, 1.7));                          // near-steady spread, easing slightly
+      const strength = 24 * Math.min(1, t / 0.12) * Math.pow(1 - t, 1.3);   // eases in, then calms
+      const m = page.getBoundingClientRect();
       const size = Math.max(2, (2 * r) / WAVE_AT);
-      pond.f.setAttribute("x", -m.left); pond.f.setAttribute("y", -m.top);
+      pond.f.setAttribute("x", -m.left); pond.f.setAttribute("y", -m.top); // filter only the visible area
       pond.f.setAttribute("width", innerWidth); pond.f.setAttribute("height", innerHeight);
-      pond.map.setAttribute("x", vx - m.left - size / 2); pond.map.setAttribute("y", vy - m.top - size / 2);
+      pond.map.setAttribute("x", ox - size / 2); pond.map.setAttribute("y", oy - size / 2);
       pond.map.setAttribute("width", size); pond.map.setAttribute("height", size);
       pond.disp.setAttribute("scale", strength.toFixed(2));
+      // The bar's new colours ride in behind the wavefront with a soft edge, fading up (no pop).
       const b = navIn.getBoundingClientRect();
-      fill.style.clipPath = `circle(${(r * 1.15).toFixed(1)}px at ${vx - b.left}px ${vy - b.top}px)`;
+      const cx = (m.left + ox - b.left).toFixed(1), cy = (m.top + oy - b.top).toFixed(1);
+      const edge = r * 0.9, mask = `radial-gradient(circle at ${cx}px ${cy}px, #000 ${Math.max(0, edge - SOFT).toFixed(1)}px, transparent ${edge.toFixed(1)}px)`;
+      fill.style.webkitMaskImage = mask;
+      fill.style.maskImage = mask;
+      fill.style.opacity = Math.min(1, t / 0.45).toFixed(3);
       if (t < 1) { raf = requestAnimationFrame(frame); return; }
       page.style.filter = "";
       navIn.classList.toggle("split", toSplit);
