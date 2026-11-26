@@ -219,9 +219,15 @@ a.inline{color:#0066cc;text-decoration:underline;text-underline-offset:3px}
 .nav-in{position:relative;height:var(--nav-h);isolation:isolate}
 .nav-yy{position:absolute;inset:0;z-index:-1;border-radius:inherit;pointer-events:none;opacity:0;
   background:linear-gradient(180deg,#1d1d1f 50%,#f2f2f4 50%);box-shadow:0 0 0 1px rgba(255,255,255,.06)}
-/* Tendo wordmark as a yin-yang capsule; the letters invert across the S-curve */
-.nav .mark{position:relative;isolation:isolate;justify-content:center;width:132px;height:36px;padding:0;margin-right:auto;border-radius:18px;
-  background:url("/assets/tendo-yy.svg") center/100% 100% no-repeat}
-.nav .mark span{color:#fff;mix-blend-mode:difference;font-size:16px;font-weight:600;letter-spacing:.02em}
+/* Tendo mark: at the very top it is a yin-yang circle bulging out of the bar (dark half up, light half
+   down, matching the bar's split). Away from the top it spins away and the plain word "Tendo" appears (staggered so they never overlap).
+   site.js sets --yy (0..1) on .nav-in, in step with the split layer, so both directions are smooth. */
+.nav-in{--yy:0}
+.nav .mark{position:relative;justify-content:flex-start;width:96px;height:36px;padding:0 0 0 6px;margin-right:auto;background:none;border-radius:0}
+.nav .mark .yy{position:absolute;left:-8px;top:50%;width:66px;height:66px;margin-top:-33px;border-radius:50%;
+  background:url("/assets/yinyang.svg") center/100% 100% no-repeat;box-shadow:0 6px 18px rgba(0,0,0,.35);
+  opacity:clamp(0, calc((var(--yy) - .45) / .55), 1);transform:rotate(calc((1 - var(--yy)) * -200deg)) scale(calc(.35 + .65 * var(--yy)));pointer-events:none}
+.nav .mark .word{font-size:17px;font-weight:600;letter-spacing:-.01em;color:var(--ink);
+  opacity:clamp(0, calc((.55 - var(--yy)) / .55), 1);transform:translateX(calc(var(--yy) * 10px))}
 .nav a.item{background:#1d1d1f;padding:8px 14px}
 .nav a.item:hover{background:#3a3a3c}

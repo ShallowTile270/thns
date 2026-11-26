@@ -1,7 +1,9 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Tendo">
+  <!-- Yin-yang turned so the dark half is on top and the light half below,
+       matching the top bar's dark (over the page) and light (over the stage) halves. -->
   <circle cx="32" cy="32" r="30" fill="#f2f2f4"/>
-  <path d="M32 2 A15 15 0 0 1 32 32 A15 15 0 0 0 32 62 A30 30 0 0 0 32 2 Z" fill="#1d1d1f"/>
-  <circle cx="32" cy="17" r="4.5" fill="#1d1d1f"/>
-  <circle cx="32" cy="47" r="4.5" fill="#f2f2f4"/>
+  <path d="M2 32 A30 30 0 0 1 62 32 A15 15 0 0 1 32 32 A15 15 0 0 0 2 32 Z" fill="#1d1d1f"/>
+  <circle cx="17" cy="32" r="4.5" fill="#1d1d1f"/>
+  <circle cx="47" cy="32" r="4.5" fill="#f2f2f4"/>
   <circle cx="32" cy="32" r="30" fill="none" stroke="#1d1d1f" stroke-width="2"/>
 </svg>

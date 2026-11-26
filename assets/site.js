@@ -77,13 +77,14 @@ if (navIn) {
   yy.setAttribute("aria-hidden", "true");
   navIn.prepend(yy);
   let amt = split ? 1 : 0;           // how much of the split look is showing (0..1)
-  yy.style.opacity = amt;
+  const paint = () => { yy.style.opacity = amt.toFixed(3); navIn.style.setProperty("--yy", amt.toFixed(3)); };
+  paint();
 
   const ripple = (toSplit) => {
     cancelAnimationFrame(raf);
     const target = toSplit ? 1 : 0, from = amt;
     if (still.matches || !page) {
-      amt = target; yy.style.opacity = amt; yy.style.maskImage = yy.style.webkitMaskImage = ""; page && (page.style.filter = "");
+      amt = target; paint(); yy.style.maskImage = yy.style.webkitMaskImage = ""; page && (page.style.filter = "");
       return;
     }
     if (!pond) pond = makePond();
@@ -118,7 +119,7 @@ if (navIn) {
       const f = fadeFor ? Math.min(1, el / fadeFor) : 1;
       const eased = f < 0.5 ? 2 * f * f : 1 - Math.pow(-2 * f + 2, 2) / 2;
       amt = from + (target - from) * eased;
-      yy.style.opacity = amt.toFixed(3);
+      paint();
       if (sweep && f < 1) {
         // The change rides out from the focal point behind the wavefront, with a soft edge.
         const b = navIn.getBoundingClientRect();
@@ -131,7 +132,7 @@ if (navIn) {
         yy.style.webkitMaskImage = ""; yy.style.maskImage = "";
       }
       if (t < 1) { raf = requestAnimationFrame(frame); return; }
-      amt = target; yy.style.opacity = amt;
+      amt = target; paint();
       page.style.filter = "";
     };
     raf = requestAnimationFrame(frame);
