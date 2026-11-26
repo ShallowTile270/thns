@@ -220,7 +220,7 @@ a.inline{color:#0066cc;text-decoration:underline;text-underline-offset:3px}
 /* Yin-yang nav: while the pill straddles the stage's top edge, its top half (over the page) is dark
    and its bottom half (over the grey stage) is light, split exactly on the stage edge
    (stage margin-top = -nav-h/2). Labels sit on solid dark chips so they read cleanly on both halves.
-   Scrolling off/onto the edge ripples between the split and the solid bar from the red pill (site.js). */
+   Scrolling off/onto the edge sends a water ripple through the page from the red pill (site.js). */
 .nav-in{position:relative;height:var(--nav-h);isolation:isolate}
 .nav-in::before{content:"";position:absolute;inset:0;z-index:-1;border-radius:inherit;opacity:0;
   background:linear-gradient(180deg,#1d1d1f 50%,#f2f2f4 50%);box-shadow:0 0 0 1px rgba(255,255,255,.06)}
@@ -229,9 +229,6 @@ a.inline{color:#0066cc;text-decoration:underline;text-underline-offset:3px}
 .nav .mark{padding:4px 14px 4px 4px;border-radius:999px;background:#1d1d1f}
 .nav a.item{background:#1d1d1f;padding:8px 14px}
 .nav a.item:hover{background:#3a3a3c}
-/* Ripple layers (created by site.js): a fill that expands from the pill, and rings that spread past the bar */
+/* Ripple layer (created by site.js): the bar's new colours, revealed with the wavefront */
 .nav-fx{position:absolute;inset:0;z-index:-1;border-radius:inherit;overflow:hidden;pointer-events:none}
 .nav-fx > i{position:absolute;inset:0}
-.nav-rings{position:absolute;inset:0;z-index:-1;pointer-events:none}
-.nav-rings > i{position:absolute;left:0;top:0;width:8px;height:8px;margin:-4px 0 0 -4px;border-radius:50%;
-  border:2px solid rgba(255,59,76,.95);opacity:0}

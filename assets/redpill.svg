@@ -1,30 +1,35 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" role="img" aria-label="Red pill">
+  <!-- The red pill as a yin-yang: the red and white halves meet in an S-curve, each holding a dot of the other. -->
   <defs>
     <linearGradient id="tile" x1="0" y1="0" x2="0" y2="1">
       <stop offset="0" stop-color="#ff5a6a"/>
       <stop offset="1" stop-color="#e3102a"/>
     </linearGradient>
-    <linearGradient id="pill" x1="0" y1="0" x2="0" y2="1">
+    <linearGradient id="white" x1="0" y1="0" x2="0" y2="1">
       <stop offset="0" stop-color="#ffffff"/>
-      <stop offset="1" stop-color="#f1d6da"/>
+      <stop offset="1" stop-color="#eed5d9"/>
     </linearGradient>
-    <linearGradient id="half" x1="0" y1="0" x2="0" y2="1">
+    <linearGradient id="red" x1="0" y1="0" x2="0" y2="1">
       <stop offset="0" stop-color="#ff3b4c"/>
       <stop offset="1" stop-color="#9e0016"/>
     </linearGradient>
     <linearGradient id="gloss" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0" stop-color="#fff" stop-opacity=".85"/>
+      <stop offset="0" stop-color="#fff" stop-opacity=".8"/>
       <stop offset="1" stop-color="#fff" stop-opacity="0"/>
     </linearGradient>
-    <clipPath id="cap"><rect x="-34" y="-14" width="68" height="28" rx="14"/></clipPath>
+    <clipPath id="cap"><rect x="-40" y="-20" width="80" height="40" rx="20"/></clipPath>
   </defs>
   <rect width="120" height="120" rx="27" fill="url(#tile)"/>
   <g transform="translate(60 60) rotate(-40)">
     <g clip-path="url(#cap)">
-      <rect x="-34" y="-14" width="68" height="28" fill="url(#pill)"/>
-      <rect x="0" y="-14" width="34" height="28" fill="url(#half)"/>
-      <rect x="-30" y="-12" width="60" height="9" rx="4.5" fill="url(#gloss)"/>
+      <rect x="-40" y="-20" width="80" height="40" fill="url(#white)"/>
+      <!-- red half: right side, with an S-shaped seam (two half-circles of radius 10) -->
+      <path d="M0 -20 A10 10 0 0 1 0 0 A10 10 0 0 0 0 20 L40 20 L40 -20 Z" fill="url(#red)"/>
+      <!-- the dots: red inside the white bulge, white inside the red bulge -->
+      <circle cx="0" cy="-10" r="3.6" fill="#d00a24"/>
+      <circle cx="0" cy="10" r="3.6" fill="#ffffff"/>
+      <rect x="-34" y="-18" width="68" height="7" rx="3.5" fill="url(#gloss)" opacity=".7"/>
     </g>
-    <rect x="-34" y="-14" width="68" height="28" rx="14" fill="none" stroke="#7a0012" stroke-opacity=".35" stroke-width="1"/>
+    <rect x="-40" y="-20" width="80" height="40" rx="20" fill="none" stroke="#7a0012" stroke-opacity=".35" stroke-width="1"/>
   </g>
 </svg>
