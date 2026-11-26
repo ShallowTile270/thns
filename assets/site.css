@@ -1,5 +1,6 @@
 /* Tendo — classic Apple-style static site. No external fonts (CSP: style-src/font-src 'self'). */
 :root{
+  --nav-h:48px;
   --page:#f5f5f7; --card:#1d1d1f; --card-2:#262628; --ink:#f5f5f7; --muted:#a1a1a6; --dim:#6e6e73;
   --link:#e8e8ed; --red:#ff3b4c; --line:rgba(255,255,255,.08);
   --serif:"Apple Garamond","ITC Garamond","Garamond","EB Garamond","Adobe Garamond Pro","Baskerville","Times New Roman",serif;
@@ -25,7 +26,7 @@ a{color:inherit;text-decoration:none}
 .nav a.cta:hover{background:#e8e8ed}
 
 /* Big dark stage card */
-.stage{margin:-28px 16px 0;padding:120px 24px 96px;background:var(--card);border-radius:22px;
+.stage{margin:calc(var(--nav-h) / -2) 16px 0;padding:120px 24px 96px;background:var(--card);border-radius:22px;
   display:flex;flex-direction:column;align-items:center;text-align:center;overflow:hidden;position:relative}
 @media (min-width:1000px){.stage{margin-left:auto;margin-right:auto;max-width:1240px}}
 .stage.short{padding:110px 24px 64px}
@@ -215,3 +216,35 @@ a.inline{color:#0066cc;text-decoration:underline;text-underline-offset:3px}
 .frame:focus-visible .shot{outline:2px solid var(--red);outline-offset:2px}
 @media (max-width:760px){.frame{width:168px}.film-track{padding:28px 18px}.film{margin-top:28px}}
 @media (prefers-reduced-motion:reduce){.shot img{transition:none}}
+
+/* Flush top bar: its middle sits exactly on the stage's top edge (stage margin-top = -nav-h/2). At the top
+   of the page it is the stage's exact colour with no shadow, and small concave corners join its sides to
+   the stage edge, so it reads as a tab rising out of the card. Once scrolled (site.js adds .floating),
+   it becomes the frosted floating bar again. */
+.nav-in{position:relative;height:var(--nav-h);background:var(--card);box-shadow:none;-webkit-backdrop-filter:none;backdrop-filter:none;
+  transition:background-color .35s ease,box-shadow .35s ease}
+/* Corner curves: radius 14px, tangent to both the stage edge and the bar's 24px rounded end, so the
+   outline flows from the card into the bar with no kink (centre 11.33px outside the bar, tangent 1.69px in). */
+.nav-in::before,.nav-in::after{content:"";position:absolute;top:calc(50% - 14px);width:13.02px;height:14px;pointer-events:none;transition:opacity .25s ease}
+.nav-in::before{left:-11.33px;background:radial-gradient(circle at 0 0,transparent 13.5px,var(--card) 14px)}
+.nav-in::after{right:-11.33px;background:radial-gradient(circle at 100% 0,transparent 13.5px,var(--card) 14px)}
+.nav-in.floating{background:rgba(29,29,31,.92);box-shadow:0 10px 30px rgba(0,0,0,.28);-webkit-backdrop-filter:saturate(180%) blur(20px);backdrop-filter:saturate(180%) blur(20px)}
+.nav-in.floating::before,.nav-in.floating::after{opacity:0}
+/* On narrow screens the bar is as wide as the card, so it simply caps the card's top edge */
+@media (max-width:700px){.nav-in::before,.nav-in::after{display:none}}
+
+/* Phone menu: the bar only fits the logo and Wake up, so a Menu button opens the section links */
+.menu-btn{display:none}
+.nav-menu{position:absolute;top:calc(var(--nav-h) + 10px);left:16px;right:16px;z-index:20;display:grid;padding:6px;border-radius:20px;
+  background:rgba(29,29,31,.97);-webkit-backdrop-filter:saturate(180%) blur(20px);backdrop-filter:saturate(180%) blur(20px);
+  box-shadow:0 18px 40px rgba(0,0,0,.45),0 0 0 1px rgba(255,255,255,.08)}
+.nav-menu[hidden]{display:none}
+.nav-menu a{padding:14px 16px;border-radius:14px;color:var(--ink);font-size:17px}
+.nav-menu a + a{border-top:1px solid rgba(255,255,255,.07)}
+.nav-menu a:hover,.nav-menu a:focus-visible{background:#2c2c2e}
+.nav-menu a[aria-current="page"]{color:#fff;font-weight:600}
+@media (max-width:560px){
+  .menu-btn:not([hidden]){display:inline-flex;align-items:center;padding:8px 14px;border:0;border-radius:999px;background:rgba(255,255,255,.08);color:var(--ink);font:inherit;font-size:15px;cursor:pointer}
+  .menu-btn[aria-expanded="true"]{background:rgba(255,255,255,.18)}
+}
+@media (min-width:561px){.nav-menu{display:none !important}}
