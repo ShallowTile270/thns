@@ -3,6 +3,40 @@
 const y = document.getElementById("year");
 if (y) y.textContent = new Date().getFullYear();
 
+// Top bar: flush with the stage at the top of the page, frosted and floating once scrolled.
+const navIn = document.querySelector(".nav-in");
+if (navIn) {
+  const onScroll = () => navIn.classList.toggle("floating", window.scrollY > 4);
+  window.addEventListener("scroll", onScroll, { passive: true });
+  onScroll();
+}
+
+// Phone menu: build a dropdown from the bar's section links (hidden on phones to save space).
+const menuBtn = document.querySelector(".menu-btn");
+if (menuBtn) {
+  const header = menuBtn.closest(".nav");
+  const menu = document.createElement("nav");
+  menu.id = "nav-menu";
+  menu.className = "nav-menu";
+  menu.setAttribute("aria-label", "Sections");
+  menu.hidden = true;
+  const here = location.pathname.replace(/\/$/, "/index.html");
+  document.querySelectorAll(".nav-in a.item").forEach((a) => {
+    const link = a.cloneNode(true);
+    link.className = "";
+    const target = new URL(a.href, location.href).pathname.replace(/\/$/, "/index.html");
+    if (target === here) link.setAttribute("aria-current", "page");
+    menu.append(link);
+  });
+  header.append(menu);
+  const setOpen = (open) => { menu.hidden = !open; menuBtn.setAttribute("aria-expanded", String(open)); };
+  menuBtn.hidden = false;
+  menuBtn.addEventListener("click", (e) => { e.stopPropagation(); setOpen(menu.hidden); });
+  menu.addEventListener("click", (e) => { if (e.target.closest("a")) setOpen(false); });
+  document.addEventListener("click", (e) => { if (!menu.hidden && !menu.contains(e.target)) setOpen(false); });
+  document.addEventListener("keydown", (e) => { if (e.key === "Escape" && !menu.hidden) { setOpen(false); menuBtn.focus(); } });
+}
+
 // Previous / Next (and the film strip) for the YouTube playlist embed, via the iframe postMessage API.
 const YT_ORIGIN = "https://www.youtube-nocookie.com";
 const VIDEO_ID = /^[\w-]{11}$/;
