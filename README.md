@@ -13,7 +13,8 @@ Plain HTML/CSS (one tiny optional JS file). No build step, no server code.
 
 ## Assets
 - `assets/site.css`: all styles (light and dark mode)
-- `assets/redpill.svg`: logo and favicon
+- `assets/tendo-yy.svg`: the yin-yang capsule behind the "Tendo" wordmark in the top bar
+- `assets/yinyang.svg`: favicon
 - `assets/site.js`: sets the footer year
 
 ## Deploy

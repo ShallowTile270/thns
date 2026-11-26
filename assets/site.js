@@ -8,15 +8,12 @@ if (y) y.textContent = new Date().getFullYear();
 // like a pebble dropped in a pond, and the bar's new colours arrive with the wavefront.
 const navIn = document.querySelector(".nav-in");
 if (navIn) {
-  const SPLIT_BG = "linear-gradient(180deg,#1d1d1f 50%,#f2f2f4 50%)";
-  const SOLID_BG = "#1d1d1f";
   const SVGNS = "http://www.w3.org/2000/svg";
   const still = window.matchMedia("(prefers-reduced-motion: reduce)");
   const page = document.querySelector("main");
   const WAVE_AT = 0.6; // where the ring sits in the displacement map (fraction of its radius)
   let split = window.scrollY < 4;
   let raf = 0, pond = null;
-  navIn.classList.toggle("split", split);
 
   // One-off displacement map: a ring-shaped wave packet. R/G push pixels radially in and out.
   const makeMap = () => {
@@ -73,37 +70,42 @@ if (navIn) {
     return { f, map, disp };
   };
 
-  const fxLayer = () => {
-    let el = navIn.querySelector(":scope > .nav-fx");
-    if (!el) { el = document.createElement("div"); el.className = "nav-fx"; el.setAttribute("aria-hidden", "true"); navIn.prepend(el); }
-    return el;
-  };
+  // The split (yin-yang) look is one layer whose opacity we own, so it always fades smoothly from
+  // wherever it currently is, in either direction, even if you reverse mid-fade.
+  const yy = document.createElement("div");
+  yy.className = "nav-yy";
+  yy.setAttribute("aria-hidden", "true");
+  navIn.prepend(yy);
+  let amt = split ? 1 : 0;           // how much of the split look is showing (0..1)
+  yy.style.opacity = amt;
 
   const ripple = (toSplit) => {
     cancelAnimationFrame(raf);
-    const fx = fxLayer();
-    fx.replaceChildren();
-    if (page) page.style.filter = "";
-    if (still.matches || !page) { navIn.classList.toggle("split", toSplit); return; }
+    const target = toSplit ? 1 : 0, from = amt;
+    if (still.matches || !page) {
+      amt = target; yy.style.opacity = amt; yy.style.maskImage = yy.style.webkitMaskImage = ""; page && (page.style.filter = "");
+      return;
+    }
     if (!pond) pond = makePond();
-
-    const fill = document.createElement("i");
-    fill.style.background = toSplit ? SPLIT_BG : SOLID_BG;
-    fx.append(fill);
     page.style.filter = "url(#pond)";
+    // A sweeping soft edge only when starting from a settled state; mid-fade reversals just keep fading.
+    const sweep = from === 0 || from === 1;
 
     // Focal point: centred just below the bar. It is fixed to the page content, so if you scroll
     // mid-ripple it travels with the content by exactly the distance scrolled.
-    const DURATION = 2000, start = performance.now();
+    const DURATION = 2000, FADE = 1300, start = performance.now();
     const b0 = navIn.getBoundingClientRect(), m0 = page.getBoundingClientRect();
     const ox = b0.left + b0.width / 2 - m0.left, oy = b0.bottom + 28 - m0.top; // in page coordinates
     const reach = Math.min(900, Math.max(420, innerWidth * 0.55));            // spreads outward, then fades
-    const SOFT = 56;                                                         // soft edge of the colour reveal
+    const SOFT = 70;                                                         // soft edge of the colour sweep
+    const PEAK = Math.min(24, Math.max(10, innerWidth / 50));                 // gentler on small screens
+    const fadeFor = FADE * Math.abs(target - from);
 
     const frame = (now) => {
-      const t = Math.min(1, (now - start) / DURATION);
+      const el = now - start;
+      const t = Math.min(1, el / DURATION);
       const r = reach * (1 - Math.pow(1 - t, 1.7));                          // near-steady spread, easing slightly
-      const strength = 24 * Math.min(1, t / 0.12) * Math.pow(1 - t, 1.3);   // eases in, then calms
+      const strength = PEAK * Math.min(1, t / 0.12) * Math.pow(1 - t, 1.3); // eases in, then calms
       const m = page.getBoundingClientRect();
       const size = Math.max(2, (2 * r) / WAVE_AT);
       pond.f.setAttribute("x", -m.left); pond.f.setAttribute("y", -m.top); // filter only the visible area
@@ -111,17 +113,26 @@ if (navIn) {
       pond.map.setAttribute("x", ox - size / 2); pond.map.setAttribute("y", oy - size / 2);
       pond.map.setAttribute("width", size); pond.map.setAttribute("height", size);
       pond.disp.setAttribute("scale", strength.toFixed(2));
-      // The bar's new colours ride in behind the wavefront with a soft edge, fading up (no pop).
-      const b = navIn.getBoundingClientRect();
-      const cx = (m.left + ox - b.left).toFixed(1), cy = (m.top + oy - b.top).toFixed(1);
-      const edge = r * 0.9, mask = `radial-gradient(circle at ${cx}px ${cy}px, #000 ${Math.max(0, edge - SOFT).toFixed(1)}px, transparent ${edge.toFixed(1)}px)`;
-      fill.style.webkitMaskImage = mask;
-      fill.style.maskImage = mask;
-      fill.style.opacity = Math.min(1, t / 0.45).toFixed(3);
+
+      // Fade the split layer toward its target with an ease, same feel in both directions.
+      const f = fadeFor ? Math.min(1, el / fadeFor) : 1;
+      const eased = f < 0.5 ? 2 * f * f : 1 - Math.pow(-2 * f + 2, 2) / 2;
+      amt = from + (target - from) * eased;
+      yy.style.opacity = amt.toFixed(3);
+      if (sweep && f < 1) {
+        // The change rides out from the focal point behind the wavefront, with a soft edge.
+        const b = navIn.getBoundingClientRect();
+        const cx = (m.left + ox - b.left).toFixed(1), cy = (m.top + oy - b.top).toFixed(1);
+        const edge = Math.max(SOFT, r * 0.95);
+        const inner = toSplit ? "#000" : "transparent", outer = toSplit ? "transparent" : "#000";
+        const mask = `radial-gradient(circle at ${cx}px ${cy}px, ${inner} ${(edge - SOFT).toFixed(1)}px, ${outer} ${edge.toFixed(1)}px)`;
+        yy.style.webkitMaskImage = mask; yy.style.maskImage = mask;
+      } else {
+        yy.style.webkitMaskImage = ""; yy.style.maskImage = "";
+      }
       if (t < 1) { raf = requestAnimationFrame(frame); return; }
+      amt = target; yy.style.opacity = amt;
       page.style.filter = "";
-      navIn.classList.toggle("split", toSplit);
-      fill.remove();
     };
     raf = requestAnimationFrame(frame);
   };
