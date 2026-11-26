@@ -1,8 +1,0 @@
-{
-  "name": "handshake-app-hub",
-  "version": "1.0.0",
-  "private": true,
-  "description": "A community directory of apps and dApps built on Handshake",
-  "scripts": { "dev": "netlify dev" },
-  "dependencies": { "@netlify/blobs": "^8.1.0" }
-}

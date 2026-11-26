@@ -100,3 +100,18 @@ a{color:inherit;text-decoration:none}
   .links{gap:14px 24px}
   .entry{flex-direction:column;gap:4px}
 }
+
+/* Blog: lede + house rules */
+.lede{max-width:640px;margin:22px auto 0;color:var(--muted);font-size:17px;line-height:1.6}
+.tile:not(a):hover{transform:none}
+.rules{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:16px;max-width:1000px;margin:0 auto}
+.rule{padding:30px;border-radius:22px;background:var(--card);color:var(--ink)}
+.rule h4{margin:0 0 14px;font-size:13px;letter-spacing:.08em;text-transform:uppercase}
+.rule.ok h4{color:#30d158}.rule.no h4{color:var(--red)}
+.rule ul{margin:0;padding:0;list-style:none}
+.rule li{position:relative;padding:10px 0 10px 28px;border-top:1px solid var(--line);color:var(--muted);font-size:16px;line-height:1.45}
+.rule li:first-child{border-top:0}
+.rule li::before{position:absolute;left:0;top:10px;font-weight:700}
+.rule.ok li::before{content:"\2713";color:#30d158}
+.rule.no li::before{content:"\2715";color:var(--red)}
+.note{max-width:640px;margin:24px auto 0;text-align:center;color:var(--dim);font-size:14px;line-height:1.6}
