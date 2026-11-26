@@ -93,25 +93,12 @@ if (player) {
     img.height = 180;
     img.loading = "lazy";
     shot.append(img);
-    const edge = document.createElement("span");
-    edge.className = "edge";
     const cap = document.createElement("span");
     cap.className = "cap";
     cap.textContent = titles[id] || "New video";
-    a.append(shot, edge, cap);
+    a.append(shot, cap);
     li.append(a);
     return li;
-  };
-
-  const renumber = () => {
-    [...track.children].forEach((li, n) => {
-      const edge = li.querySelector(".edge");
-      if (!edge) return;
-      edge.textContent = "TENDO 442 ▸ ";
-      const b = document.createElement("b");
-      b.textContent = String(n + 1).padStart(2, "0");
-      edge.append(b, "A");
-    });
   };
 
   const syncFilm = () => {
@@ -125,7 +112,6 @@ if (player) {
         track.append(frames[id]); // re-appending moves it, so the strip follows the playlist order
       });
       Object.keys(frames).forEach((id) => { if (!state.list.includes(id)) frames[id].remove(); });
-      renumber();
     }
     const id = state.list[state.idx];
     if (titles[id] && frames[id]) {

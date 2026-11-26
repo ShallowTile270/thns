@@ -188,34 +188,28 @@ a.inline{color:#0066cc;text-decoration:underline;text-underline-offset:3px}
 .linkempty{margin:0;padding:28px;border:1px dashed rgba(0,0,0,.18);border-radius:18px;color:var(--dim);text-align:center}
 @media (prefers-color-scheme:dark){.linkempty{border-color:rgba(255,255,255,.2)}}
 
-/* Videos page: old-school film strip of thumbnails under the player */
-.film{width:100%;max-width:1120px;margin:36px auto 0;overflow-x:auto;overscroll-behavior-x:contain;scroll-snap-type:x proximity;
-  border-radius:6px;scrollbar-width:thin;scrollbar-color:#3a3a3c transparent;-webkit-mask-image:linear-gradient(90deg,transparent,#000 3%,#000 97%,transparent);mask-image:linear-gradient(90deg,transparent,#000 3%,#000 97%,transparent)}
-.film-track{display:flex;width:max-content;min-width:100%;margin:0;padding:30px 28px;list-style:none;gap:0;
-  background-color:#0a0a0a;
-  background-image:
-    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='26' height='30'%3E%3Crect x='7' y='9' width='12' height='12' rx='2.5' fill='%23e9e2d0' fill-opacity='.82'/%3E%3C/svg%3E"),
-    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='26' height='30'%3E%3Crect x='7' y='9' width='12' height='12' rx='2.5' fill='%23e9e2d0' fill-opacity='.82'/%3E%3C/svg%3E"),
-    linear-gradient(180deg,rgba(255,170,60,.06),transparent 30%,transparent 70%,rgba(255,170,60,.06));
-  background-repeat:repeat-x,repeat-x,no-repeat;background-position:0 0,0 100%,0 0;background-size:26px 30px,26px 30px,100% 100%}
-.film-track li{flex:none;scroll-snap-align:center;padding:0 7px;border-left:1px solid #000;border-right:1px solid #1a1a1a}
-.frame{display:flex;flex-direction:column;width:220px;color:var(--ink);text-align:left}
-.shot{position:relative;display:block;aspect-ratio:16/9;overflow:hidden;border-radius:3px;background:#000;box-shadow:inset 0 0 0 1px rgba(255,255,255,.06)}
-.shot img{display:block;width:100%;height:100%;object-fit:cover;filter:sepia(.35) saturate(.75) brightness(.72) contrast(1.05);transition:filter .3s,transform .4s}
-.shot::after{content:"";position:absolute;inset:0;box-shadow:inset 0 0 22px rgba(0,0,0,.65);pointer-events:none}
-.shot em{position:absolute;right:6px;bottom:6px;z-index:1;padding:1px 6px;border-radius:4px;background:rgba(0,0,0,.75);font-style:normal;font-size:11px;font-weight:600;color:#fff}
-.edge{display:block;margin-top:8px;font-family:"SF Mono",ui-monospace,Menlo,Consolas,monospace;font-size:10px;letter-spacing:.14em;color:#e0913a}
-.edge b{font-weight:700}
-.cap{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;margin-top:4px;font-size:13px;line-height:1.35;color:var(--muted);min-height:2.7em}
-.frame:hover .shot img{filter:none;transform:scale(1.04)}
+/* Videos page: a clean row of video thumbnails under the player (scrolls sideways when they don't all fit) */
+.film{width:100%;max-width:1120px;margin:32px auto 0;overflow-x:auto;overscroll-behavior-x:contain;scroll-snap-type:x proximity;scroll-padding-inline:6px;
+  scrollbar-width:thin;scrollbar-color:#3a3a3c transparent}
+.film-track{display:flex;gap:18px;width:max-content;min-width:100%;margin:0;padding:6px 6px 14px;list-style:none}
+.film-track li{flex:none;scroll-snap-align:start}
+.frame{display:flex;flex-direction:column;width:232px;color:var(--ink);text-align:left}
+.shot{position:relative;display:block;aspect-ratio:16/9;overflow:hidden;border-radius:14px;background:#000;
+  box-shadow:0 0 0 1px rgba(255,255,255,.07),0 10px 24px rgba(0,0,0,.35);transition:box-shadow .25s ease,transform .25s ease}
+.shot img{display:block;width:100%;height:100%;object-fit:cover;opacity:.78;transition:opacity .25s ease,transform .4s ease}
+.shot em{position:absolute;right:8px;bottom:8px;padding:2px 7px;border-radius:6px;background:rgba(0,0,0,.72);
+  font-style:normal;font-size:12px;font-weight:600;color:#fff;-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px)}
+.cap{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;margin-top:12px;font-size:15px;line-height:1.35;color:var(--muted);min-height:2.7em;transition:color .2s}
+.frame:hover .shot{transform:translateY(-2px)}
+.frame:hover .shot img{opacity:1;transform:scale(1.03)}
 .frame:hover .cap{color:var(--ink)}
-.frame.on .shot{box-shadow:0 0 0 2px var(--red),0 0 24px rgba(255,59,76,.35)}
-.frame.on .shot img{filter:none}
-.frame.on .cap{color:var(--ink)}
+.frame.on .shot{box-shadow:0 0 0 2px #f5f5f7,0 12px 28px rgba(0,0,0,.45)}
+.frame.on .shot img{opacity:1}
+.frame.on .cap{color:var(--ink);font-weight:600}
 .frame:focus-visible{outline:none}
-.frame:focus-visible .shot{outline:2px solid var(--red);outline-offset:2px}
-@media (max-width:760px){.frame{width:168px}.film-track{padding:28px 18px}.film{margin-top:28px}}
-@media (prefers-reduced-motion:reduce){.shot img{transition:none}}
+.frame:focus-visible .shot{box-shadow:0 0 0 2px var(--red),0 12px 28px rgba(0,0,0,.45)}
+@media (max-width:760px){.frame{width:180px}.film-track{gap:14px}.film{margin-top:24px}.cap{font-size:14px}}
+@media (prefers-reduced-motion:reduce){.shot,.shot img{transition:none}}
 
 /* Flush top bar: its middle sits exactly on the stage's top edge (stage margin-top = -nav-h/2). At the top
    of the page it is the stage's exact colour with no shadow, and small concave corners join its sides to
