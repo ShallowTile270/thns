@@ -143,3 +143,26 @@ a.inline{color:#0066cc;text-decoration:underline;text-underline-offset:3px}
 .form button:hover{background:#e8e8ed}
 .hp{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
 @media (max-width:560px){.form{padding:24px 20px}.form .row{grid-template-columns:1fr}.soc{min-width:0;width:100%}}
+
+/* Video player in the stage, with Previous / Next on either side */
+.player{width:100%;max-width:1120px;margin:48px auto 0;display:grid;grid-template-columns:auto 1fr auto;grid-template-areas:"prev screen next" ". now .";align-items:center;gap:16px 32px}
+.screen{grid-area:screen;aspect-ratio:16/9;border-radius:18px;overflow:hidden;background:#000;box-shadow:0 30px 60px rgba(0,0,0,.45),0 0 0 1px rgba(255,255,255,.06)}
+.screen iframe{display:block;width:100%;height:100%;border:0}
+.pnav{display:flex;align-items:center;justify-content:center;width:60px;height:60px;padding:0;border-radius:50%;border:1px solid rgba(255,255,255,.14);
+  background:rgba(255,255,255,.07);color:#fff;cursor:pointer;transition:background .2s,transform .2s,border-color .2s;font:inherit}
+.pnav[hidden]{display:none}
+.pnav.prev{grid-area:prev}.pnav.next{grid-area:next}
+.pnav:hover{background:rgba(255,255,255,.16);border-color:rgba(255,255,255,.3)}
+.pnav:active{transform:scale(.94)}
+.pnav svg{width:26px;height:26px;fill:none;stroke:currentColor;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
+.pnav span{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+.now{grid-area:now;margin:0;color:var(--muted);font-size:14px;min-height:1.4em;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.stage.watch{padding-bottom:72px}
+@media (max-width:760px){
+  .player{grid-template-columns:1fr 1fr;grid-template-areas:"screen screen" "now now" "prev next";gap:14px;margin-top:36px}
+  .screen{border-radius:14px}
+  .pnav{width:auto;height:auto;border-radius:999px;padding:12px 20px;gap:6px}
+  .pnav span{position:static;width:auto;height:auto;clip:auto;font-size:15px}
+  .pnav svg{width:18px;height:18px}
+  .pnav.prev{justify-self:start;padding-left:14px}.pnav.next{justify-self:end;flex-direction:row-reverse;padding-right:14px}
+}
