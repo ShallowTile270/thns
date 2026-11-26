@@ -3,6 +3,14 @@
 const y = document.getElementById("year");
 if (y) y.textContent = new Date().getFullYear();
 
+// Yin-yang nav: split colours only while the pill straddles the stage's top edge (at the top of the page).
+const navIn = document.querySelector(".nav-in");
+if (navIn) {
+  const onScroll = () => navIn.classList.toggle("split", window.scrollY < 4);
+  window.addEventListener("scroll", onScroll, { passive: true });
+  onScroll();
+}
+
 // Previous / Next (and the film strip) for the YouTube playlist embed, via the iframe postMessage API.
 const YT_ORIGIN = "https://www.youtube-nocookie.com";
 const VIDEO_ID = /^[\w-]{11}$/;
