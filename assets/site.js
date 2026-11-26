@@ -3,6 +3,32 @@
 const y = document.getElementById("year");
 if (y) y.textContent = new Date().getFullYear();
 
+// Phone menu: build a dropdown from the bar's section links (hidden on phones to save space).
+const menuBtn = document.querySelector(".menu-btn");
+if (menuBtn) {
+  const header = menuBtn.closest(".nav");
+  const menu = document.createElement("nav");
+  menu.id = "nav-menu";
+  menu.className = "nav-menu";
+  menu.setAttribute("aria-label", "Sections");
+  menu.hidden = true;
+  const here = location.pathname.replace(/\/$/, "/index.html");
+  document.querySelectorAll(".nav-in a.item").forEach((a) => {
+    const link = a.cloneNode(true);
+    link.className = "";
+    const target = new URL(a.href, location.href).pathname.replace(/\/$/, "/index.html");
+    if (target === here) link.setAttribute("aria-current", "page");
+    menu.append(link);
+  });
+  header.append(menu);
+  const setOpen = (open) => { menu.hidden = !open; menuBtn.setAttribute("aria-expanded", String(open)); };
+  menuBtn.hidden = false;
+  menuBtn.addEventListener("click", (e) => { e.stopPropagation(); setOpen(menu.hidden); });
+  menu.addEventListener("click", (e) => { if (e.target.closest("a")) setOpen(false); });
+  document.addEventListener("click", (e) => { if (!menu.hidden && !menu.contains(e.target)) setOpen(false); });
+  document.addEventListener("keydown", (e) => { if (e.key === "Escape" && !menu.hidden) { setOpen(false); menuBtn.focus(); } });
+}
+
 // Yin-yang nav: split colours only while the pill straddles the stage's top edge (top of the page).
 // Crossing the threshold sends a water ripple through the page itself, outward from a point just below the bar,
 // like a pebble dropped in a pond, and the bar's new colours arrive with the wavefront.

@@ -13,7 +13,8 @@ Plain HTML/CSS (one tiny optional JS file). No build step, no server code.
 
 ## Assets
 - `assets/site.css`: all styles (light and dark mode)
-- `assets/yinyang.svg`: yin-yang mark (top bar at the top of the page, and favicon)
+- `assets/yinyang-bar.svg`: yin-yang that forms the top bar's left cap at the top of the page
+- `assets/yinyang.svg`: favicon
 - `assets/site.js`: sets the footer year
 
 ## Deploy

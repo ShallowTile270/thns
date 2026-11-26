@@ -219,15 +219,31 @@ a.inline{color:#0066cc;text-decoration:underline;text-underline-offset:3px}
 .nav-in{position:relative;height:var(--nav-h);isolation:isolate}
 .nav-yy{position:absolute;inset:0;z-index:-1;border-radius:inherit;pointer-events:none;opacity:0;
   background:linear-gradient(180deg,#1d1d1f 50%,#f2f2f4 50%);box-shadow:0 0 0 1px rgba(255,255,255,.06)}
-/* Tendo mark: at the very top it is a yin-yang circle bulging out of the bar (dark half up, light half
-   down, matching the bar's split). Away from the top it spins away and the plain word "Tendo" appears (staggered so they never overlap).
+/* Tendo mark: at the very top it is a yin-yang that forms the bar's rounded left cap (dark half up, light
+   half down, running straight into the bar's split). Away from the top it spins away and the plain word "Tendo" appears (staggered so they never overlap).
    site.js sets --yy (0..1) on .nav-in, in step with the split layer, so both directions are smooth. */
 .nav-in{--yy:0}
 .nav .mark{position:relative;justify-content:flex-start;width:96px;height:36px;padding:0 0 0 6px;margin-right:auto;background:none;border-radius:0}
-.nav .mark .yy{position:absolute;left:-8px;top:50%;width:66px;height:66px;margin-top:-33px;border-radius:50%;
-  background:url("/assets/yinyang.svg") center/100% 100% no-repeat;box-shadow:0 6px 18px rgba(0,0,0,.35);
+.nav .mark .yy{position:absolute;left:-14px;top:50%;width:var(--nav-h);height:var(--nav-h);margin-top:calc(var(--nav-h) / -2);border-radius:50%;
+  background:url("/assets/yinyang-bar.svg") center/100% 100% no-repeat;
   opacity:clamp(0, calc((var(--yy) - .45) / .55), 1);transform:rotate(calc((1 - var(--yy)) * -200deg)) scale(calc(.35 + .65 * var(--yy)));pointer-events:none}
 .nav .mark .word{font-size:17px;font-weight:600;letter-spacing:-.01em;color:var(--ink);
   opacity:clamp(0, calc((.55 - var(--yy)) / .55), 1);transform:translateX(calc(var(--yy) * 10px))}
 .nav a.item{background:#1d1d1f;padding:8px 14px}
 .nav a.item:hover{background:#3a3a3c}
+
+/* Phone menu: the bar only fits the mark and Wake up, so a Menu button opens the section links */
+.menu-btn{display:none}
+.nav-menu{position:absolute;top:calc(var(--nav-h) + 10px);left:16px;right:16px;z-index:20;display:grid;padding:6px;border-radius:20px;
+  background:rgba(29,29,31,.97);-webkit-backdrop-filter:saturate(180%) blur(20px);backdrop-filter:saturate(180%) blur(20px);
+  box-shadow:0 18px 40px rgba(0,0,0,.45),0 0 0 1px rgba(255,255,255,.08)}
+.nav-menu[hidden]{display:none}
+.nav-menu a{padding:14px 16px;border-radius:14px;color:var(--ink);font-size:17px}
+.nav-menu a + a{border-top:1px solid rgba(255,255,255,.07)}
+.nav-menu a:hover,.nav-menu a:focus-visible{background:#2c2c2e}
+.nav-menu a[aria-current="page"]{color:#fff;font-weight:600}
+@media (max-width:560px){
+  .menu-btn:not([hidden]){display:inline-flex;align-items:center;padding:8px 14px;border:0;border-radius:999px;background:#1d1d1f;color:var(--ink);font:inherit;font-size:15px;cursor:pointer}
+  .menu-btn[aria-expanded="true"]{background:#3a3a3c}
+}
+@media (min-width:561px){.nav-menu{display:none !important}}
