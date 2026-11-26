@@ -7,6 +7,7 @@ Plain HTML/CSS (one tiny optional JS file). No build step, no server code.
 - `index.html`: landing page (title, "Welcome to Handshake.", section links, Explore tiles)
 - `videos.html`, `podcasts.html`, `news.html`: section pages. Add entries by following the commented example in each file.
 - `blog.html`: an open platform for student societies, marginalised communities and independent writers. It includes the house rules: ideas are welcome, incitement is not.
+- `contact.html`: contact form using Netlify Forms (no server code). Submissions appear in the Netlify dashboard under Forms; make sure form detection is enabled there. `thanks.html` is the confirmation page.
 
 ## Assets
 - `assets/site.css`: all styles (light and dark mode)
