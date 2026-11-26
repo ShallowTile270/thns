@@ -184,3 +184,5 @@ a.inline{color:#0066cc;text-decoration:underline;text-underline-offset:3px}
 .linkcard span{margin-top:6px;color:var(--muted);font-size:15px;line-height:1.5}
 .linkcard small{margin-top:auto;padding-top:16px;color:var(--red);font-size:13px}
 .linkcard small::after{content:" \2197"}
+.linkempty{margin:0;padding:28px;border:1px dashed rgba(0,0,0,.18);border-radius:18px;color:var(--dim);text-align:center}
+@media (prefers-color-scheme:dark){.linkempty{border-color:rgba(255,255,255,.2)}}
