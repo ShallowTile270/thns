@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" role="img" aria-label="Red pill">
+  <defs>
+    <linearGradient id="tile" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#ff5a6a"/>
+      <stop offset="1" stop-color="#e3102a"/>
+    </linearGradient>
+    <linearGradient id="pill" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#ffffff"/>
+      <stop offset="1" stop-color="#f1d6da"/>
+    </linearGradient>
+    <linearGradient id="half" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#ff3b4c"/>
+      <stop offset="1" stop-color="#9e0016"/>
+    </linearGradient>
+    <linearGradient id="gloss" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#fff" stop-opacity=".85"/>
+      <stop offset="1" stop-color="#fff" stop-opacity="0"/>
+    </linearGradient>
+    <clipPath id="cap"><rect x="-34" y="-14" width="68" height="28" rx="14"/></clipPath>
+  </defs>
+  <rect width="120" height="120" rx="27" fill="url(#tile)"/>
+  <g transform="translate(60 60) rotate(-40)">
+    <g clip-path="url(#cap)">
+      <rect x="-34" y="-14" width="68" height="28" fill="url(#pill)"/>
+      <rect x="0" y="-14" width="34" height="28" fill="url(#half)"/>
+      <rect x="-30" y="-12" width="60" height="9" rx="4.5" fill="url(#gloss)"/>
+    </g>
+    <rect x="-34" y="-14" width="68" height="28" rx="14" fill="none" stroke="#7a0012" stroke-opacity=".35" stroke-width="1"/>
+  </g>
+</svg>

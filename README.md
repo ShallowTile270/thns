@@ -1,28 +1,19 @@
-# Handshake App Hub
+# Tendo
 
-A community directory where builders post their Handshake apps/dApps and newcomers browse them.
-Plain HTML/CSS/JS frontend + Netlify Functions with Netlify Blobs storage. No build step.
+Tendo's static site on Handshake: a landing page plus Videos, Blog, Podcasts and News.
+Plain HTML/CSS (one tiny optional JS file). No build step, no server code.
 
-## Deploy (Netlify)
-1. Push this repo to GitHub and import it in Netlify (publish dir `.`, functions `netlify/functions` — already in `netlify.toml`).
-2. Site settings → Environment variables → add `ADMIN_TOKEN` (a long random string).
-3. Deploy. Visit `/admin.html`, enter the token, and approve submissions.
+## Pages
+- `index.html`: landing page (title, "Welcome to Handshake.", section links, Explore tiles)
+- `videos.html`, `podcasts.html`, `news.html`: section pages. Add entries by following the commented example in each file.
+- `blog.html`: an open platform for student societies, marginalised communities and independent writers. It includes the house rules: ideas are welcome, incitement is not.
+- `contact.html`: contact form using Netlify Forms (no server code). Submissions appear in the Netlify dashboard under Forms; make sure form detection is enabled there. `thanks.html` is the confirmation page.
 
-## How it works
-- `/submit.html` → `POST /api/submit` stores a **pending** listing (validation, honeypot, 3 submissions/hour/IP).
-- `/admin.html` lists everything; approve / reject / feature / delete (Bearer `ADMIN_TOKEN`).
-- Approved apps show on `/`, `/browse.html`, `/app.html?id=…`; upvotes dedupe per IP.
-- Until a real listing is approved, labeled sample listings from `assets/seed.json` are shown. Edit or delete that file freely.
+## Assets
+- `assets/site.css`: all styles (light and dark mode)
+- `assets/redpill.svg`: logo and favicon
+- `assets/site.js`: sets the footer year
 
-## Local dev
-```bash
-npm install
-ADMIN_TOKEN=test npx netlify dev
-```
-(Opening files with a plain static server works too, but shows only sample data.)
-
-## Notes
-- Strict CSP is set in `netlify.toml` (no inline scripts/styles, same-origin fetches). Screenshots may be any https image.
-- All user content is rendered via `textContent`; links are restricted to http(s) with `rel="noopener noreferrer nofollow"`.
-- The homepage (`index.html`) is a black "Tendo" splash; the directory lives at `/browse.html`, `/submit.html`.
-- To host the same files on a Handshake name, point it at the Netlify site; relative `/…` paths work from the site root.
+## Deploy
+Netlify publishes the repo root as-is (`netlify.toml`). Any static host works, including one served on a Handshake name.
+A strict CSP is set in `netlify.toml`, so keep scripts and styles in files: no inline `<script>`/`style=""` and no external fonts.
